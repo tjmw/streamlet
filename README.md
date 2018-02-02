@@ -1,5 +1,7 @@
 # Streamlet
 
+[![Build Status](https://travis-ci.org/tjmw/streamlet.svg?branch=master)](https://travis-ci.org/tjmw/streamlet)
+
 Chain operations which may fail or succeed.
 
 ## Installation
