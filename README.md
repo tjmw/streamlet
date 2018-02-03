@@ -23,20 +23,21 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-success = 1
-failure = nil
+def half_to_whole_number(number)
+  halved = number.to_f / 2
+  halved % 1 == 0 ? halved.to_i : nil
+end
 
-Streamlet.new(proc { success }).
-  and_then(proc { |val| increment(val) }).
-  and_then(proc { |val| increment(val) }).
-  and_then(proc { |val| increment(val) }).
-  result # => 4
+Streamlet.new(->() { half_to_whole_number(16) }).  # => 8
+  and_then(->(val) { half_to_whole_number(val) }). # => 4
+  and_then(->(val) { half_to_whole_number(val) }). # => 2
+  and_then(->(val) { half_to_whole_number(val) }). # => 1
+  result # => 1
 
-Streamlet.new(proc { success }).
-  and_then(proc { |val| increment(val) }).
-  and_then(proc { failure }).
-  and_then(proc { |val| increment(val) }).
-  and_then(proc { |val| increment(val) }).
+Streamlet.new(->() { half_to_whole_number(12) }).  # => 6
+  and_then(->(val) { half_to_whole_number(val) }). # => 3
+  and_then(->(val) { half_to_whole_number(val) }). # => nil
+  and_then(->(val) { half_to_whole_number(val) }). # no-op
   result # => nil
 ```
 
