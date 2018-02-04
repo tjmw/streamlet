@@ -1,6 +1,7 @@
 # Streamlet
 
 [![Build Status](https://travis-ci.org/tjmw/streamlet.svg?branch=master)](https://travis-ci.org/tjmw/streamlet)
+[![Gem Version](https://badge.fury.io/rb/streamlet.svg)](https://badge.fury.io/rb/streamlet)
 
 Chain operations which may fail or succeed, inspired by forays into functional programming.
 
