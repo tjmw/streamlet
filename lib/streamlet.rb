@@ -1,6 +1,4 @@
 class Streamlet
-  VERSION = "0.1.0"
-
   def initialize(operation, *args)
     @operation = operation
     @args = args
