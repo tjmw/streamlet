@@ -1,19 +1,19 @@
 class Streamlet
-  def initialize(operation, *args)
-    @operation = operation
+  def initialize(*args, &operation)
     @args = args
+    @operation = operation
     @success_test = proc { |resp| !!resp }
   end
 
-  def set_success_test(success_test)
+  def set_success_test(&success_test)
     @success_test = success_test
     self
   end
 
-  def and_then(next_operation)
+  def and_then(&next_operation)
     if success_test.call(result)
-      Streamlet.new(next_operation, result).
-        set_success_test(success_test)
+      Streamlet.new(result, &next_operation).
+        set_success_test(&success_test)
     else
       Failure.new(result)
     end
@@ -32,7 +32,7 @@ class Streamlet
       @result = result
     end
 
-    def and_then(_)
+    def and_then(&_)
       self
     end
 

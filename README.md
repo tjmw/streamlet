@@ -28,16 +28,16 @@ def half_to_whole_number(number)
   halved % 1 == 0 ? halved.to_i : nil
 end
 
-Streamlet.new(->() { half_to_whole_number(16) }).  # => 8
-  and_then(->(val) { half_to_whole_number(val) }). # => 4
-  and_then(->(val) { half_to_whole_number(val) }). # => 2
-  and_then(->(val) { half_to_whole_number(val) }). # => 1
+Streamlet.new { half_to_whole_number(16) }.     # => 8
+  and_then { |val| half_to_whole_number(val) }. # => 4
+  and_then { |val| half_to_whole_number(val) }. # => 2
+  and_then { |val| half_to_whole_number(val) }. # => 1
   result # => 1
 
-Streamlet.new(->() { half_to_whole_number(12) }).  # => 6
-  and_then(->(val) { half_to_whole_number(val) }). # => 3
-  and_then(->(val) { half_to_whole_number(val) }). # => nil
-  and_then(->(val) { half_to_whole_number(val) }). # no-op
+Streamlet.new { half_to_whole_number(12) }.     # => 6
+  and_then { |val| half_to_whole_number(val) }. # => 3
+  and_then { |val| half_to_whole_number(val) }. # => nil
+  and_then { |val| half_to_whole_number(val) }. # no-op
   result # => nil
 ```
 
